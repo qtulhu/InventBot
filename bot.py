@@ -17,7 +17,7 @@ def start(m):
     keyboard.add(types.KeyboardButton('Инвентаризация'))
     keyboard.add(types.KeyboardButton('Инструкции'))
     
-    bot.send_message(m.chat.id, 'Для начала, давайте определим ваш адрес',
+    bot.send_message(m.chat.id, 'Для начала, давайте определм ваш адрес',
         reply_markup=keyboard)
     bot.register_next_step_handler(msg, name)
 
