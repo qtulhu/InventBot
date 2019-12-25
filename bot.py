@@ -5,8 +5,7 @@ import telebot
 from queue import Queue  # in python 2 it should be "from Queue"
 from threading import Thread
 
-from telegram import Bot
-from telegram.ext import Dispatcher
+import telegram
 
 
 
