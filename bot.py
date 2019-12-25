@@ -17,7 +17,7 @@ def handle_text(message):
 
 
 # Обработчик команд '/start' и '/help'.
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=["start"])
 def handle_start(message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*[types.KeyboardButton(name) for name in ['Моё местоположение...', 'Инвентаризация', 'Инструкции']])
