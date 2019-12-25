@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import telebot
+from telebot import types
 
 
 
