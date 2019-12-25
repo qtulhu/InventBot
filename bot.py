@@ -9,7 +9,7 @@ bot = telebot.TeleBot("920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
 
 # Обработчик команд '/start' и '/help'.
 @bot.message_handler(commands=['start'])
-def handle_start(message):
+def start(message):
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*[types.KeyboardButton(name) for name in ['Моё местоположение...', 'Инвентаризация', 'Инструкции']])
     msg = bot.send_message(message.chat.id, 'Давай сначала определим где ты находишься, а затем произведем инвентаризацию',
