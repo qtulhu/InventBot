@@ -24,7 +24,7 @@ def start(m):
 @bot.message_handler(commands=["Найти меня"])
 def geoposition(m):
 	msg = bot.send_message(m.chat.id, "Вы находитесь")
-    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    
     keyboard.add(types.KeyboardButton('Отправить местоположение', request_location=True))
     bot.register_next_step_handler(msg, name)
     
