@@ -13,8 +13,10 @@ bot = telebot.TeleBot(TOKEN)
 def start(m):
     msg = bot.send_message(m.chat.id, "Вас приветствует Бот")
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(*[types.KeyboardButton(name) for name in ['Местоположение', request_location=True, 'Инвентаризация']])
-    keyboard.add(*[types.KeyboardButton(name) for name in ['Инструкции', '???']])
+    keyboard.add(types.KeyboardButton('Местоположение', request_location=True))
+    keyboard.add(types.KeyboardButton('Инвентаризация'))
+    keyboard.add(types.KeyboardButton('Инструкции'))
+    
     bot.send_message(m.chat.id, 'Выберите нужный пункт',
         reply_markup=keyboard)
     bot.register_next_step_handler(msg, name)
