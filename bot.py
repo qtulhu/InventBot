@@ -21,7 +21,7 @@ def start(m):
         reply_markup=keyboard)
     bot.register_next_step_handler(msg, name)
 
-
+@bot.message_handler(content_types=["text"])
 def name(m):
     if m.text == 'Местоположение':
         keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
