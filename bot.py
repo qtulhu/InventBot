@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 import os
 import telebot
-import telegram
-import telegram.ext
+
 
 
 
 TOKEN = "920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y"
-PORT = int(os.environ.get('PORT','8443'))
-updater = Updater(TOKEN)
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=["start"])
@@ -42,6 +39,4 @@ def name(m):
 
 
 
-updater.start_webhook(listen="127.0.0.1", port=PORT, url_path=TOKEN)
-updater.bot.set_webhook("https://iventbot.herokuapp.com" + TOKEN)
-updater.idle()
+bot.polling(none_stop=True, interval=0)
