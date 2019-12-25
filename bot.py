@@ -13,21 +13,13 @@ bot = telebot.TeleBot(TOKEN)
 def start(m):
     msg = bot.send_message(m.chat.id, "Вас приветствует Бот инвентаризации")
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(types.KeyboardButton('Найти меня'))
+    keyboard.add(types.KeyboardButton('Найти меня', request_location=True))
     keyboard.add(types.KeyboardButton('Инвентаризация'))
     keyboard.add(types.KeyboardButton('Инструкции'))
     
     bot.send_message(m.chat.id, 'Для начала, давайте определм ваш адрес',
         reply_markup=keyboard)
     bot.register_next_step_handler(msg, name)
-
-@bot.message_handler(commands=["Найти меня"])
-def geoposition(m):
-	msg = bot.send_message(m.chat.id, "Вы находитесь")
-    
-    keyboard.add(types.KeyboardButton('Отправить местоположение', request_location=True))
-    bot.register_next_step_handler(msg, name)
-    
 
 
 def name(m):
