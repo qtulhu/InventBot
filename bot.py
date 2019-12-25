@@ -3,10 +3,11 @@ import os
 import telebot
 from flask import Flask, request
 
-server = Flask(__name__)
 
-
-bot = telebot.TeleBot("920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
+TOKEN = "920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y"
+PORT = int(os.environ.get('PORT','8443'))
+updater = Updater(TOKEN)
+bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=["start"])
 def start(m):
@@ -39,16 +40,6 @@ def name(m):
 
 
 
-@server.route("/bot", methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
-
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url="https://iventbot.herokuapp.com") 
-    return "!", 200
-
-server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
-server = Flask(__name__)
+updater.start_webhook(listen="127.0.0.1", port=PORT, url_path=TOKEN)
+updater.bot.set_webhook("https://iventbot.herokuapp.com" + TOKEN)
+updater.idle()
