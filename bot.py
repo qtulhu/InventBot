@@ -4,38 +4,33 @@ import telebot
 
 bot = telebot.TeleBot("920710380:AAG8uT7mRjpMXDkY13v4OZyrxt2jMV0JE6Y")
 
-# Обработчик команд '/start' и '/help'.
-@bot.message_handler(commands=['start'])
-def handle_start(message):
+@bot.message_handler(commands=["start"])
+def start(m):
+    msg = bot.send_message(m.chat.id, "Вас приветствует Бот")
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(*[types.KeyboardButton(name) for name in ['Моё местоположение...', 'Инвентаризация', 'Инструкции']])
-    msg = bot.send_message(message.chat.id, 'Давай сначала определим где ты находишься, а затем произведем инвентаризацию',
-    	reply_markup=keyboard)
-    bot.register_next_step_handler(msg,name)
+    keyboard.add(*[types.KeyboardButton(name) for name in ['О компании', 'Прайс-лист']])
+    keyboard.add(*[types.KeyboardButton(name) for name in ['Акции', 'Контакты']])
+    bot.send_message(m.chat.id, 'Выберите в меню что вам интересно!',
+        reply_markup=keyboard)
+    bot.register_next_step_handler(msg, name)
 
-
-@bot.message_handler(content_types=["text"])
-def handle_text(message):
-    if message.text == "Hi":
-        bot.send_message(message.from_user.id, "Hello! I am HabrahabrExampleBot. How can i help you?")
-    
-    elif message.text == "How are you?" or message.text == "How are u?":
-        bot.send_message(message.from_user.id, "I'm fine, thanks. And you?")
-    
-    else:
-        bot.send_message(message.from_user.id, "Sorry, i dont understand you.")
-
-
-
-
-
-#def option(message):
-	#if message.text == 'Моё местоположение...':
-	#	msg = bot.send_message(message.chat.id, )
-
- # Обработчик для документов и аудиофайлов
-@bot.message_handler(content_types=['document', 'audio'])
-def handle_document_audio(message):
-    pass
+def name(m):
+    if m.text == 'О компании':
+        keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        keyboard.add(*[types.KeyboardButton(advert) for advert in ['Сертификаты']])
+        keyboard.add(*[types.KeyboardButton(advert) for advert in ['В начало']])
+        bot.send_message(m.chat.id, 'инфа о компании',
+            reply_markup=keyboard)
+    elif m.text == 'Прайс-лист':
+        keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        keyboard.add(*[types.KeyboardButton(advert) for advert in ['Общий', 'Одиночный']])
+        keyboard.add(*[types.KeyboardButton(advert) for advert in ['В начало']])
+        bot.send_message(m.chat.id, 'Выберите прайс который нужен.',
+            reply_markup=keyboard)
+    elif m.text == 'Акции':
+        keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        keyboard.add(*[types.KeyboardButton(advert) for advert in ['В начало']])
+        bot.send_message(m.chat.id, 'Сожалею, но в данный момент акций нет(',
+            reply_markup=keyboard)
 
 bot.polling()
