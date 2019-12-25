@@ -40,7 +40,7 @@ def name(m):
         bot.send_message(m.chat.id, 'Сделай всё отлично',
             reply_markup=keyboard)
 
-@bot.message_handler(commands=['Назад'])
-def
+#@bot.message_handler(commands=['Назад'])
+#def
 
 bot.polling(none_stop=True, interval=0)
