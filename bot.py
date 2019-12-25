@@ -17,9 +17,17 @@ def handle_text(message):
 bot.polling(none_stop=True, interval=0)
 
 # Обработчик команд '/start' и '/help'.
-@bot.message_handler(commands=['start', 'help'])
-def handle_start_help(message):
-    pass
+@bot.message_handler(commands=['start'])
+def handle_start(message):
+    keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add(*[types.KeyboardButton(name) for name in ['Моё местоположение...', 'Инвентаризация', 'Инструкции']])
+    msg = bot.send_message(message.chat.id, 'Давай сначала определим где ты находишься, а затем произведем инвентаризацию',
+    	reply_markup=keyboard)
+    bot.register_next_step_handler(msg,name)
+
+#def option(message):
+	#if message.text == 'Моё местоположение...':
+	#	msg = bot.send_message(message.chat.id, )
 
  # Обработчик для документов и аудиофайлов
 @bot.message_handler(content_types=['document', 'audio'])
