@@ -13,7 +13,7 @@ bot = telebot.TeleBot(TOKEN)
 def start(m):
     msg = bot.send_message(m.chat.id, "Вас приветствует Бот")
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(*[types.KeyboardButton(name) for name in ['Местоположение', 'Инвентаризация']])
+    keyboard.add(*[types.KeyboardButton(name) for name in ['Местоположение', request_location=True, 'Инвентаризация']])
     keyboard.add(*[types.KeyboardButton(name) for name in ['Инструкции', '???']])
     bot.send_message(m.chat.id, 'Выберите нужный пункт',
         reply_markup=keyboard)
@@ -38,6 +38,7 @@ def name(m):
         bot.send_message(m.chat.id, 'Сделай всё отлично',
             reply_markup=keyboard)
 
-
+@bot.message_handler(commands=['Назад'])
+def
 
 bot.polling(none_stop=True, interval=0)
