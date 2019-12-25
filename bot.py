@@ -13,9 +13,9 @@ bot = telebot.TeleBot(TOKEN)
 def start(m):
     msg = bot.send_message(m.chat.id, "Вас приветствует Бот")
     keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(KeyboardButton('Местоположение', request_location=True))
-    keyboard.add(KeyboardButton('Инвентаризация'))
-    keyboard.add(KeyboardButton('Инструкции'))
+    keyboard.add(types.KeyboardButton('Местоположение', request_location=True))
+    keyboard.add(types.KeyboardButton('Инвентаризация'))
+    keyboard.add(types.KeyboardButton('Инструкции'))
     
     bot.send_message(m.chat.id, 'Выберите нужный пункт',
         reply_markup=keyboard)
